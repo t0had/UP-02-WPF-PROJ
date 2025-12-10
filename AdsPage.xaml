@@ -24,13 +24,14 @@
 
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
             <TextBlock Text="Город"/>
-            <ComboBox x:Name="CityCheck" SelectedItem="{Binding Cities}" DisplayMemberPath="Name"/>
+            <ComboBox x:Name="CityCheck" SelectedItem="{Binding Cities}" DisplayMemberPath="Name" SelectionChanged="CmbCheck_SelectionChanged" IsEditable="True"/>
             <TextBlock Text="Категория"/>
-            <ComboBox x:Name="CategoryCheck" SelectedItem="{Binding Categories}" DisplayMemberPath="Name"/>
+            <ComboBox x:Name="CategoryCheck" SelectedItem="{Binding Categories}" DisplayMemberPath="Name" SelectionChanged="CmbCheck_SelectionChanged" IsEditable="True"/>
             <TextBlock Text="Тип"/>
-            <ComboBox x:Name="TypeCheck" SelectedItem="{Binding Ad_types}" DisplayMemberPath="Name"/>
+            <ComboBox x:Name="TypeCheck" SelectedItem="{Binding Ad_types}" DisplayMemberPath="Name" SelectionChanged="CmbCheck_SelectionChanged" IsEditable="True"/>
             <TextBlock Text="Статус"/>
-            <ComboBox x:Name="StatusCheck" SelectedItem="{Binding Ad_statuses}" DisplayMemberPath="Name"/>
+            <ComboBox x:Name="StatusCheck" SelectedItem="{Binding Ad_statuses}" DisplayMemberPath="Name" SelectionChanged="CmbCheck_SelectionChanged" IsEditable="True"/>
+            <Button x:Name="ButtonClearFilter" Content="Очистить фильтр" Width="80" Height="25" Margin="10,0,0,0" Click="ButtonClearFilter_Click"/>
         </StackPanel>
         
         <DataGrid x:Name="DataGridAds" IsReadOnly="True" AutoGenerateColumns="False" Grid.Row="1">
