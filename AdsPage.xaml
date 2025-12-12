@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Goman_WPF_PROJ_UP02"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="900"
       Title="AdsPage">
 
     <Page.Resources>
@@ -31,7 +31,7 @@
             <ComboBox x:Name="TypeCheck" SelectedItem="{Binding Ad_types}" DisplayMemberPath="Name" SelectionChanged="CmbCheck_SelectionChanged" IsEditable="True"/>
             <TextBlock Text="Статус"/>
             <ComboBox x:Name="StatusCheck" SelectedItem="{Binding Ad_statuses}" DisplayMemberPath="Name" SelectionChanged="CmbCheck_SelectionChanged" IsEditable="True"/>
-            <Button x:Name="ButtonClearFilter" Content="Очистить фильтр" Width="80" Height="25" Margin="10,0,0,0" Click="ButtonClearFilter_Click"/>
+            <Button x:Name="ButtonClearFilter" Content="Очистить фильтр" Width="130" Height="25" Margin="10,0,0,0" Click="ButtonClearFilter_Click"/>
         </StackPanel>
         
         <DataGrid x:Name="DataGridAds" IsReadOnly="True" AutoGenerateColumns="False" Grid.Row="1">
