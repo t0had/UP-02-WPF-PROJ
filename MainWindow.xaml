@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
         <Frame Name="MainFrame" 
            Grid.Row="1" 
-           Source="/AdsPage.xaml" 
+           Source="/LoginPage.xaml" 
            NavigationUIVisibility="Hidden"
            BorderBrush="LightGray"
            BorderThickness="0,1,0,0"></Frame>

@@ -1,41 +1,103 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Goman_WPF_PROJ_UP02
 {
-    /// <summary>
-    /// Логика взаимодействия для AdsPage.xaml
-    /// </summary>
     public partial class AdsPage : Page
     {
         public AdsPage()
         {
             InitializeComponent();
-            try
-            {
-                ItemsControl itemsControl = new ItemsControl();
+        }
 
-                DataGridAds.ItemsSource = AdsServiceDBEntities.GetContext().Advertisements.ToList();
-                CityCheck.ItemsSource = AdsServiceDBEntities.GetContext().Cities.ToList();
-                CategoryCheck.ItemsSource = AdsServiceDBEntities.GetContext().Categories.ToList();
-                TypeCheck.ItemsSource = AdsServiceDBEntities.GetContext().Ad_Types.ToList();
-                StatusCheck.ItemsSource = AdsServiceDBEntities.GetContext().Ad_Statuses.ToList();
-            }
-            catch (Exception ex)
+        private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
             {
-                MessageBox.Show(ex.Message);
+                AdsServiceDBEntities.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
+                UpdateContent();
+                LoadCombos();
+            }
+        }
+
+        private void LoadCombos()
+        {
+            CityCheck.ItemsSource = AdsServiceDBEntities.GetContext().Cities.ToList();
+            CategoryCheck.ItemsSource = AdsServiceDBEntities.GetContext().Categories.ToList();
+            TypeCheck.ItemsSource = AdsServiceDBEntities.GetContext().Ad_Types.ToList();
+            StatusCheck.ItemsSource = AdsServiceDBEntities.GetContext().Ad_Statuses.ToList();
+        }
+
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AddEditAdPage(null));
+        }
+
+        private void BtnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataGridAds.SelectedItem is Advertisements selectedAd)
+            {
+                // проверка прав. пользователь может редактировать только свои объявления
+                if (selectedAd.User_Id == App.CurrentUser.Id)
+                {
+                    NavigationService.Navigate(new AddEditAdPage(selectedAd));
+                }
+                else
+                {
+                    MessageBox.Show("Вы можете редактировать только собственные объявления.", "Доступ запрещен", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите объявление для редактирования.", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedAds = DataGridAds.SelectedItems.Cast<Advertisements>().ToList();
+
+            if (selectedAds.Count == 0)
+            {
+                MessageBox.Show("Выберите элементы для удаления.", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            // проверка прав. пользователь не может удалять чужие объявления
+            if (selectedAds.Any(ad => ad.User_Id != App.CurrentUser.Id))
+            {
+                MessageBox.Show("Среди выбранных элементов есть чужие объявления. Удаление невозможно.", "Ошибка доступа", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (MessageBox.Show($"Вы точно хотите удалить следующие {selectedAds.Count} элементов?", "Внимание",
+                MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    AdsServiceDBEntities.GetContext().Advertisements.RemoveRange(selectedAds);
+                    AdsServiceDBEntities.GetContext().SaveChanges();
+                    MessageBox.Show("Данные удалены!", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+                    UpdateContent(); 
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка при удалении", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void DataGridAds_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (DataGridAds.SelectedItem is Advertisements selectedAd)
+            {
+                if (selectedAd.User_Id == App.CurrentUser.Id)
+                    NavigationService.Navigate(new AddEditAdPage(selectedAd));
+                else
+                    MessageBox.Show("Это не ваше объявление.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
         private void UpdateContent()
@@ -83,5 +145,10 @@ namespace Goman_WPF_PROJ_UP02
             TypeCheck.SelectedItem = null;
             StatusCheck.SelectedItem = null;
         }
+        private void BtnHistory_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new CompletedAdsPage());
+        }
+
     }
 }

@@ -13,5 +13,7 @@ namespace Goman_WPF_PROJ_UP02
     /// </summary>
     public partial class App : Application
     {
+        public static Users CurrentUser { get; set; }
     }
+
 }

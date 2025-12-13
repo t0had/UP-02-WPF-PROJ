@@ -1,0 +1,56 @@
+﻿<Page x:Class="Goman_WPF_PROJ_UP02.AddEditAdPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="1000"
+      Title="Редактирование объявления">
+
+    <Page.Resources>
+        <ResourceDictionary Source="/Dictionary1.xaml"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Редактирование объявления" FontSize="24" FontWeight="Bold" Margin="20" HorizontalAlignment="Center"/>
+
+        <ScrollViewer Grid.Row="1">
+            <StackPanel Width="410" HorizontalAlignment="Center">
+
+                <TextBlock Text="Заголовок:"/>
+                <TextBox Text="{Binding Ad_title}" Width="400" HorizontalAlignment="Left" MaxLength="200"/>
+
+                <TextBlock Text="Описание:"/>
+                <TextBox Text="{Binding Ad_description}" Width="400" Height="100" TextWrapping="Wrap" AcceptsReturn="True" HorizontalAlignment="Left"/>
+
+                <TextBlock Text="Город:"/>
+                <ComboBox Name="ComboCity" DisplayMemberPath="Name" SelectedValuePath="Id" Width="400" HorizontalAlignment="Left"/>
+
+                <TextBlock Text="Категория:"/>
+                <ComboBox Name="ComboCategory" DisplayMemberPath="Name" SelectedValuePath="Id" Width="400" HorizontalAlignment="Left"/>
+
+                <TextBlock Text="Тип сделки:"/>
+                <ComboBox Name="ComboType" DisplayMemberPath="Name" SelectedValuePath="Id" Width="400" HorizontalAlignment="Left"/>
+
+                <TextBlock Text="Статус:"/>
+                <ComboBox Name="ComboStatus" DisplayMemberPath="Name" SelectedValuePath="Id" Width="400" HorizontalAlignment="Left" SelectionChanged="ComboStatus_SelectionChanged"/>
+
+                <TextBlock Text="Стоимость:" Margin="0,10,0,0"/>
+                <TextBox Name="TxtPrice" Text="{Binding Price, StringFormat=N2}" Width="400" HorizontalAlignment="Left"/>
+                <TextBlock Text="* При завершении укажите полученную прибыль" FontSize="10" Foreground="Gray" FontStyle="Italic"/>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
+            <Button Content="Сохранить" Click="BtnSave_Click" Width="150" Margin="10"/>
+            <Button Content="Назад" Click="BtnBack_Click" Width="150" Margin="10" Background="Gray"/>
+        </StackPanel>
+    </Grid>
+</Page>

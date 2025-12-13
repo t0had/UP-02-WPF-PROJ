@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Goman_WPF_PROJ_UP02"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="900"
+      d:DesignHeight="450" d:DesignWidth="1200" IsVisibleChanged="Page_IsVisibleChanged"
       Title="AdsPage">
 
     <Page.Resources>
@@ -22,7 +22,12 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button Content="Моя прибыль" 
+            Click="BtnHistory_Click" 
+            Width="140" 
+            Background="#78909C" 
+            Margin="16,0,0,0"/>
             <TextBlock Text="Город"/>
             <ComboBox x:Name="CityCheck" SelectedItem="{Binding Cities}" DisplayMemberPath="Name" SelectionChanged="CmbCheck_SelectionChanged" IsEditable="True"/>
             <TextBlock Text="Категория"/>
@@ -31,7 +36,11 @@
             <ComboBox x:Name="TypeCheck" SelectedItem="{Binding Ad_types}" DisplayMemberPath="Name" SelectionChanged="CmbCheck_SelectionChanged" IsEditable="True"/>
             <TextBlock Text="Статус"/>
             <ComboBox x:Name="StatusCheck" SelectedItem="{Binding Ad_statuses}" DisplayMemberPath="Name" SelectionChanged="CmbCheck_SelectionChanged" IsEditable="True"/>
-            <Button x:Name="ButtonClearFilter" Content="Очистить фильтр" Width="130" Height="25" Margin="10,0,0,0" Click="ButtonClearFilter_Click"/>
+            <Button x:Name="ButtonClearFilter" Content="Очистить фильтр" Click="ButtonClearFilter_Click"/>
+            
+            <Button Content="Добавить" Click="BtnAdd_Click"/>
+            <Button Content="Удалить" Click="BtnDelete_Click" Background="#FF5252"/>
+            <Button Content="Редактировать" Click="BtnEdit_Click"/>
         </StackPanel>
         
         <DataGrid x:Name="DataGridAds" IsReadOnly="True" AutoGenerateColumns="False" Grid.Row="1">
