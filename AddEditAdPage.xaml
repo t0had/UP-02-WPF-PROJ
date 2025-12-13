@@ -21,28 +21,28 @@
         <TextBlock Text="Редактирование объявления" FontSize="24" FontWeight="Bold" Margin="20" HorizontalAlignment="Center"/>
 
         <ScrollViewer Grid.Row="1">
-            <StackPanel Width="410" HorizontalAlignment="Center">
+            <StackPanel Width="450" HorizontalAlignment="Center">
 
                 <TextBlock Text="Заголовок:"/>
-                <TextBox Text="{Binding Ad_title}" Width="400" HorizontalAlignment="Left" MaxLength="200"/>
+                <TextBox Text="{Binding Ad_title}" Width="390" HorizontalAlignment="Left" MaxLength="200"/>
 
                 <TextBlock Text="Описание:"/>
-                <TextBox Text="{Binding Ad_description}" Width="400" Height="100" TextWrapping="Wrap" AcceptsReturn="True" HorizontalAlignment="Left"/>
+                <TextBox Text="{Binding Ad_description}" Width="390" Height="100" TextWrapping="Wrap" AcceptsReturn="True" HorizontalAlignment="Left"/>
 
                 <TextBlock Text="Город:"/>
-                <ComboBox Name="ComboCity" DisplayMemberPath="Name" SelectedValuePath="Id" Width="400" HorizontalAlignment="Left"/>
+                <ComboBox Name="ComboCity" DisplayMemberPath="Name" SelectedValuePath="Id" Width="390" HorizontalAlignment="Left"/>
 
                 <TextBlock Text="Категория:"/>
-                <ComboBox Name="ComboCategory" DisplayMemberPath="Name" SelectedValuePath="Id" Width="400" HorizontalAlignment="Left"/>
+                <ComboBox Name="ComboCategory" DisplayMemberPath="Name" SelectedValuePath="Id" Width="390" HorizontalAlignment="Left"/>
 
                 <TextBlock Text="Тип сделки:"/>
-                <ComboBox Name="ComboType" DisplayMemberPath="Name" SelectedValuePath="Id" Width="400" HorizontalAlignment="Left"/>
+                <ComboBox Name="ComboType" DisplayMemberPath="Name" SelectedValuePath="Id" Width="390" HorizontalAlignment="Left"/>
 
                 <TextBlock Text="Статус:"/>
-                <ComboBox Name="ComboStatus" DisplayMemberPath="Name" SelectedValuePath="Id" Width="400" HorizontalAlignment="Left" SelectionChanged="ComboStatus_SelectionChanged"/>
+                <ComboBox Name="ComboStatus" DisplayMemberPath="Name" SelectedValuePath="Id" Width="390" HorizontalAlignment="Left" SelectionChanged="ComboStatus_SelectionChanged"/>
 
                 <TextBlock Text="Стоимость:" Margin="0,10,0,0"/>
-                <TextBox Name="TxtPrice" Text="{Binding Price, StringFormat=N2}" Width="400" HorizontalAlignment="Left"/>
+                <TextBox Name="TxtPrice" Text="{Binding Price}" Width="390" HorizontalAlignment="Left"/>
                 <TextBlock Text="* При завершении укажите полученную прибыль" FontSize="10" Foreground="Gray" FontStyle="Italic"/>
 
             </StackPanel>
