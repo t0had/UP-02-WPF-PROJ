@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Navigation;
 using Microsoft.Win32;
-using System.IO;       // Для File
+using System.IO;
 
 namespace Goman_WPF_PROJ_UP02
 {
@@ -141,10 +141,8 @@ namespace Goman_WPF_PROJ_UP02
             {
                 try
                 {
-                    // Считываем файл в массив байтов
                     _currentAd.Ad_photo = File.ReadAllBytes(openFileDialog.FileName);
 
-                    // Обновляем превью на форме (WPF сам поймет, как отобразить byte[] в Image)
                     ImgPreview.Source = (System.Windows.Media.ImageSource)new ImageSourceConverter().ConvertFrom(_currentAd.Ad_photo);
                 }
                 catch (Exception ex)

@@ -61,23 +61,17 @@
                 <DataGridTemplateColumn Header="Фотография" Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <!-- Убираем Source из тега Image -->
                             <Image Width="80" Height="60" 
                    Stretch="Uniform"
                    RenderOptions.BitmapScalingMode="HighQuality">
                                 <Image.Style>
                                     <Style TargetType="Image">
-                                        <!-- 1. По умолчанию (Setter) биндим на фото из базы -->
                                         <Setter Property="Source" Value="{Binding Ad_photo}"/>
 
-                                        <!-- 2. Триггер: Если фото нет (null), ставим заглушку -->
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding Ad_photo}" Value="{x:Null}">
                                                 <Setter Property="Source" Value="/Logo.png"/>
-                                                <!-- Путь к вашей картинке-заглушке -->
                                             </DataTrigger>
-                                            <!-- Дополнительно: если массив пустой (Length=0), но не null (иногда бывает) -->
-                                            <!-- Это требует конвертера, но для базового случая null достаточно -->
                                         </Style.Triggers>
                                     </Style>
                                 </Image.Style>
