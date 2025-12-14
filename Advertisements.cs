@@ -24,6 +24,7 @@ namespace Goman_WPF_PROJ_UP02
         public int Category_Id { get; set; }
         public int Ad_type_Id { get; set; }
         public int Ad_status_Id { get; set; }
+        public byte[] Ad_photo { get; set; }
     
         public virtual Ad_Statuses Ad_Statuses { get; set; }
         public virtual Ad_Types Ad_Types { get; set; }

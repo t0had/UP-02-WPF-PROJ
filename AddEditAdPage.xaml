@@ -45,6 +45,36 @@
                 <TextBox Name="TxtPrice" Text="{Binding Price}" Width="390" HorizontalAlignment="Left"/>
                 <TextBlock Text="* При завершении укажите полученную прибыль" FontSize="10" Foreground="Gray" FontStyle="Italic"/>
 
+
+                <TextBlock Text="Фотография:" Margin="0,10,0,0"/>
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <!-- Изображение (превью) -->
+                    <Image x:Name="ImgPreview" 
+       Width="100" Height="100" 
+       Stretch="Uniform" 
+       Margin="0,0,10,0"
+       RenderOptions.BitmapScalingMode="HighQuality">
+                        <Image.Style>
+                            <Style TargetType="Image">
+                                <!-- 1. Сначала пытаемся взять картинку из базы -->
+                                <Setter Property="Source" Value="{Binding Ad_photo}"/>
+
+                                <Style.Triggers>
+                                    <!-- 2. ВАЖНО: Используем DataTrigger вместо Trigger -->
+                                    <!-- Мы проверяем поле Ad_photo в данных, а не свойство Source у картинки -->
+                                    <DataTrigger Binding="{Binding Ad_photo}" Value="{x:Null}">
+                                        <Setter Property="Source" Value="/Logo.png"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Button Content="Выбрать фото..." 
+            Click="BtnSelectImage_Click" 
+            Width="120" 
+            VerticalAlignment="Bottom"/>
+                </StackPanel>
             </StackPanel>
         </ScrollViewer>
 

@@ -3,7 +3,10 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Navigation;
+using Microsoft.Win32;
+using System.IO;       // Для File
 
 namespace Goman_WPF_PROJ_UP02
 {
@@ -127,6 +130,27 @@ namespace Goman_WPF_PROJ_UP02
             if (ComboStatus.SelectedItem is Ad_Statuses selectedStatus && selectedStatus.Name == "Завершено")
             {
                 MessageBox.Show("Вы выбрали статус 'Завершено'. Пожалуйста, убедитесь, что в поле 'Стоимость' указана итоговая полученная прибыль.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+        private void BtnSelectImage_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                try
+                {
+                    // Считываем файл в массив байтов
+                    _currentAd.Ad_photo = File.ReadAllBytes(openFileDialog.FileName);
+
+                    // Обновляем превью на форме (WPF сам поймет, как отобразить byte[] в Image)
+                    ImgPreview.Source = (System.Windows.Media.ImageSource)new ImageSourceConverter().ConvertFrom(_currentAd.Ad_photo);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка загрузки фото: {ex.Message}");
+                }
             }
         }
     }

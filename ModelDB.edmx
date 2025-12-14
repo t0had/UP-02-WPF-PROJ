@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище AdsServiceDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище AdsServiceDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Ad_Statuses">
           <Key>
             <PropertyRef Name="Id" />
@@ -33,6 +33,7 @@
           <Property Name="Category_Id" Type="int" Nullable="false" />
           <Property Name="Ad_type_Id" Type="int" Nullable="false" />
           <Property Name="Ad_status_Id" Type="int" Nullable="false" />
+          <Property Name="Ad_photo" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Categories">
           <Key>
@@ -146,8 +147,7 @@
             <End Role="Advertisements" EntitySet="Advertisements" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AdsServiceDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -186,6 +186,7 @@
           <NavigationProperty Name="Categories" Relationship="Self.FK__Advertise__Categ__49C3F6B7" FromRole="Advertisements" ToRole="Categories" />
           <NavigationProperty Name="Cities" Relationship="Self.FK__Advertise__City___48CFD27E" FromRole="Advertisements" ToRole="Cities" />
           <NavigationProperty Name="Users" Relationship="Self.FK__Advertise__User___47DBAE45" FromRole="Advertisements" ToRole="Users" />
+          <Property Name="Ad_photo" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Categories">
           <Key>
@@ -327,6 +328,7 @@
           <EntitySetMapping Name="Advertisements">
             <EntityTypeMapping TypeName="AdsServiceDBModel.Advertisements">
               <MappingFragment StoreEntitySet="Advertisements">
+                <ScalarProperty Name="Ad_photo" ColumnName="Ad_photo" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Ad_title" ColumnName="Ad_title" />
                 <ScalarProperty Name="Ad_description" ColumnName="Ad_description" />
