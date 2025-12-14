@@ -36,6 +36,11 @@
                     Margin="0,20,0,0" 
                     Width="150" 
                     HorizontalAlignment="Center"/>
+            <Button Content="Войти без регистрации" 
+                    Click="BtnLoginWithoutAuth_Click" 
+                    Margin="0,20,0,0" 
+                    Width="200" 
+                    HorizontalAlignment="Center"/>
         </StackPanel>
     </Grid>
 </Page>

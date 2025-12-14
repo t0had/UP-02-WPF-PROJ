@@ -24,16 +24,16 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="Моя прибыль" 
+            <Button x:Name="BtnHistory" Content="Моя прибыль" 
             Click="BtnHistory_Click" 
             Width="140" 
             Background="#78909C" 
             Margin="16,0,0,0"/>
-            
-            
-            <Button Content="Добавить" Click="BtnAdd_Click"/>
-            <Button Content="Удалить" Click="BtnDelete_Click" Background="#FF5252"/>
-            <Button Content="Редактировать" Click="BtnEdit_Click"/>
+
+
+            <Button x:Name="BtnAdd" Content="Добавить" Click="BtnAdd_Click"/>
+            <Button x:Name="BtnDelete" Content="Удалить" Click="BtnDelete_Click" Background="#FF5252"/>
+            <Button x:Name="BtnEdit" Content="Редактировать" Click="BtnEdit_Click"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
             <TextBlock Text="Город"/>

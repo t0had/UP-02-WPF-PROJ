@@ -46,5 +46,10 @@ namespace Goman_WPF_PROJ_UP02
                 MessageBox.Show($"Ошибка подключения к базе данных: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        private void BtnLoginWithoutAuth_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AdsPage());
+            App.CurrentUser = null;
+        }
     }
 }

@@ -36,6 +36,7 @@ CREATE TABLE Advertisements (
     Ad_description NVARCHAR(MAX),
     Ad_post_date DATETIME NOT NULL DEFAULT GETDATE(),
     
+	Ad_photo VARBINARY(MAX) NULL;
     Price DECIMAL(18,2) NOT NULL CHECK (Price >= 0),
     
     User_Id INT NOT NULL REFERENCES Users(Id) ON DELETE CASCADE ON UPDATE CASCADE,

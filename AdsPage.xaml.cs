@@ -20,6 +20,21 @@ namespace Goman_WPF_PROJ_UP02
                 AdsServiceDBEntities.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
                 UpdateContent();
                 LoadCombos();
+
+                if (App.CurrentUser == null)
+                {
+                    BtnAdd.Visibility = Visibility.Collapsed;
+                    BtnDelete.Visibility = Visibility.Collapsed;
+                    BtnEdit.Visibility = Visibility.Collapsed;
+                    BtnHistory.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    BtnAdd.Visibility = Visibility.Visible;
+                    BtnDelete.Visibility = Visibility.Visible;
+                    BtnEdit.Visibility = Visibility.Visible;
+                    BtnHistory.Visibility = Visibility.Visible;
+                }
             }
         }
 
@@ -40,7 +55,6 @@ namespace Goman_WPF_PROJ_UP02
         {
             if (DataGridAds.SelectedItem is Advertisements selectedAd)
             {
-                // проверка прав. пользователь может редактировать только свои объявления
                 if (selectedAd.User_Id == App.CurrentUser.Id)
                 {
                     NavigationService.Navigate(new AddEditAdPage(selectedAd));
@@ -66,7 +80,6 @@ namespace Goman_WPF_PROJ_UP02
                 return;
             }
 
-            // проверка прав. пользователь не может удалять чужие объявления
             if (selectedAds.Any(ad => ad.User_Id != App.CurrentUser.Id))
             {
                 MessageBox.Show("Среди выбранных элементов есть чужие объявления. Удаление невозможно.", "Ошибка доступа", MessageBoxButton.OK, MessageBoxImage.Error);
